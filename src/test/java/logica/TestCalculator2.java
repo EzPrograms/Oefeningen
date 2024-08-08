@@ -1,3 +1,4 @@
+/*
 package logica;
 
 import javax.security.sasl.SaslClient;
@@ -33,3 +34,4 @@ public class TestCalculator2 {
 
     }
 }
+*/

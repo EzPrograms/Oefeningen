@@ -1,3 +1,4 @@
+/*
 package logica;
 
 public class Calculator2 {
@@ -37,4 +38,4 @@ public class Calculator2 {
         }
     }
 }
-
+*/

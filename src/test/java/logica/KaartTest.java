@@ -1,4 +1,3 @@
-/*
 package logica;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.TestInstance;
  *
  * @author kristien.vanassche
  * @version 25/2/2024
- */ /*
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KaartTest {
     private Kaart kaart1, kaart2, kaart3, kaart4, kaart5, kaart6;
@@ -169,4 +168,4 @@ class KaartTest {
 
 
 }
-*/
+
