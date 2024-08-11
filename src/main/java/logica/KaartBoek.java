@@ -1,176 +1,135 @@
-/*
 package logica;
-
-import jdk.jshell.SourceCodeAnalysis;
-import org.jetbrains.annotations.NotNull;
-
-import javax.security.auth.login.AccountNotFoundException;
+import java.util.Arrays;
 
 public class KaartBoek {
-    final int AANTAL = 52;
+    int aantal;
     Kaart [] kaarten;
 
-    public KaartBoek() {
+    public KaartBoek(){
 
+        aantal = 52;
 
-        kaarten = new Kaart[AANTAL];
+        String soort = "HKRS";
+        String waarde = "23456789TBDHA";
+        kaarten = new Kaart[aantal];
         int count = 0;
 
-        for (int i = 1; i <= AANTAL-1 ; i++){
-           if (count >=13){ /* Dit is een teller en om de 13 kaarten reset deze dit dient om het nummer van 2 tot 9 aan een kaart te geven want i niet gebruikt worden hiervoor */
-         /*     count = 1;
-           } else {
-               count++;
-           }
-            if (i<=9&&i!=1){
-               kaarten[i] = new Kaart("H"+i);
-               } else if (i<=13&&i>9||i==1){
-                switch (i){
-                    case 10:
-                        kaarten[i] = new Kaart("HT");
-                        break;
-                    case 11:
-                        kaarten[i] = new Kaart("HB");
-                        break;
-                    case 12:
-                        kaarten[i] = new Kaart("HD");
-                        break;
-                    case 13:
-                        kaarten[i] = new Kaart("HH");
-                        break;
-                    case 1:
-                        kaarten[i] = new Kaart("HA");
-                        break;
-                }
-            }
-            if (i<=22&&i!=14&&i>13){
+        for (int i = 0; i<=3; i++){
+            for (int j = 0; j<=12; j++){
 
-                kaarten[i] = new Kaart("K"+ count);
-            } else if (i<=26&&i>22||i==14){
-                switch (i){
-                    case 23:
-                        kaarten[i] = new Kaart("KT");
-                        break;
-                    case 24:
-                        kaarten[i] = new Kaart("KB");
-                        break;
-                    case 25:
-                        kaarten[i] = new Kaart("KD");
-                        break;
-                    case 26:
-                        kaarten[i] = new Kaart("KH");
-                        break;
-                    case 14:
-                        kaarten[i] = new Kaart("KA");
-                        break;
-                }
-            }
-            if (i<=35&&i!=27&&i>26){
-                kaarten[i] = new Kaart("R"+count);
-            } else if (i<=39&&i>35||i==27){
-                switch (i){
-                    case 36:
-                        kaarten[i] = new Kaart("RT");
-                        break;
-                    case 37:
-                        kaarten[i] = new Kaart("RB");
-                        break;
-                    case 38:
-                        kaarten[i] = new Kaart("RD");
-                        break;
-                    case 39:
-                        kaarten[i] = new Kaart("RH");
-                        break;
-                    case 27:
-                        kaarten[i] = new Kaart("RA");
-                        break;
-                }
-            }
-            if (i<=48&&i!=40&&i>39){
-                kaarten[i] = new Kaart("S"+count);
-            } else if (i<=52&&i>48||i==40){
-                switch (i){
-                    case 49:
-                        kaarten[i] = new Kaart("ST");
-                        break;
-                    case 50:
-                        kaarten[i] = new Kaart("SB");
-                        break;
-                    case 51:
-                        kaarten[i] = new Kaart("SD");
-                        break;
-                    case 52:
-                        kaarten[i] = new Kaart("SH");
-                        break;
-                    case 40:
-                        kaarten[i] = new Kaart("SA");
-                        break;
-                }
+                kaarten[count] = new Kaart(soort.charAt(i),waarde.charAt(j));
+                count++;
+
             }
         }
     }
+    public KaartBoek(char [] kaart){
 
-    public KaartBoek(char @NotNull [] soorten){
+        String waarde = "23456789TBDHA";
+        int correct = 0;
 
+        for (int k = 0; k<=kaart.length-1;k++){
+            if (Kaart.isGeldigeSoort(kaart[k])){
+                correct++;
+            }
+        }
+        aantal = correct * 13;
+        kaarten = new Kaart[aantal];
+        int count = 0;
 
-        kaarten = new Kaart[AANTAL];
+        for (int i = 0; i<=correct-1; i++){
+            for (int j = 0; j<=12; j++){
+                kaarten[count] = new Kaart(kaart[i],waarde.charAt(j));
+                count++;
+            }
+        }
+    }
+    public KaartBoek(String[] kaart){
 
-        for(int i = 0; i <= soorten.length-1; i++) {
-            if (soorten[i] == 'H' || soorten[i] == 'K' || soorten[i] == 'R' || soorten[i] == 'S' ){
-                for (int j = 1; j <= 13; j++) {
-                    char soort = soorten[i];
-                    char waarde = (char) j;
-                    if (j >= 10 && j <= 13 || j == 1) {
-                        switch (j) {
-                            case 1:
-                                kaarten[j] = new Kaart(soort, 'A');
-                                break;
-                            case 10:
-                                kaarten[j] = new Kaart(soort, 'T');
-                                break;
-                            case 11:
-                                kaarten[j] = new Kaart(soort, 'B');
-                                break;
-                            case 12:
-                                kaarten[j] = new Kaart(soort, 'D');
-                                break;
-                            case 13:
-                                kaarten[j] = new Kaart(soort, 'H');
-                                break;
-                        }
-                    } else {
-                        kaarten[j] = new Kaart(soort, waarde);
+        Kaart[] cards = new Kaart[kaart.length];
+        for (int i = 0; i<=kaart.length-1 ;i++){
+            if (Kaart.isGeldigeKaart(kaart[i])){
+                cards[i] = new Kaart(kaart[i]);
+                kaarten = cards;
+            } else {
+                kaarten = Arrays.copyOf(cards, kaart.length-1);
+            }
+        }
+    }
+    public boolean bevatKaart(String kaart){
+
+        boolean isKaart = false;
+
+        for (int i = 0; i<= kaarten.length-1; i++){
+         if (kaarten[i].toString().equals(kaart)){
+          isKaart = true;
+            }
+        }
+        return isKaart;
+    }
+    public boolean bevatKaartVanSoort(char soort){
+        boolean isSoort = false;
+        if (Kaart.isGeldigeSoort(soort)){
+            for (int i = 0; i <= kaarten.length-1; i++){
+                char soort1 = kaarten[i].toString().charAt(0);
+                if (soort == soort1){
+                    isSoort = true;
+                }
+            }
+        }
+        return isSoort;
+    }
+    public Kaart [] geefAlleKaartenVanSoort(char soort){
+        Kaart [] cards = new Kaart[0];
+        if (Kaart.isGeldigeSoort(soort)) {
+            if (kaarten.length>=13){
+                cards = new Kaart[13];
+            }else{
+                cards = new Kaart[1];
+            }
+            int count = 0;
+                for (int j = 0; j <= kaarten.length-1; j++) {
+                    if (kaarten[j].toString().charAt(0) == soort){
+                        cards[count] = new Kaart(soort, kaarten[j].toString().charAt(1)) ;
+                        count++;
                     }
                 }
+
+        }
+        int noneNull = 0;
+        for (int i = 0; i<=cards.length-1;i++){
+            if (cards[i] != null){
+                noneNull++;
             }
         }
+        if (noneNull==0){
+            return cards = new Kaart[0];
+        } else {
+            return cards;
+        }
     }
-    public KaartBoek(String [] kaarten){
+    public Kaart geefRandomKaart(){
+        Kaart random;
+        int max = kaarten.length-1;
 
-        String soort;
-        String waarde;
-        this.kaarten = new Kaart[AANTAL];
+        random = kaarten[(int) (Math.random() * (max + 1))];
 
+        return random;
+    }
+    public  Kaart geefRandomKaartVanSoort(char soort){
+        Kaart soortRandom;
+        int max = kaarten.length-1;
+        int correct = 0;
 
-        for (int i = 0; i <= kaarten.length-1; i++){
-            for(int j = 0; j <= kaarten[i].length() +1; i++){
-
-                soort = kaarten[i].substring(0,1);
-                waarde = kaarten[i].substring(1,2);
-
-                if (soort.equals("H") || soort.equals("K") || soort.equals("R") || soort.equals("S")){
-                 if (waarde.equals("2") || waarde.equals("3") || waarde.equals("4") || waarde.equals("5") || waarde.equals("6") || waarde.equals("7") ||  waarde.equals("8") || waarde.equals("9") || waarde.equals("T") || waarde.equals("B") || waarde.equals("D") || waarde.equals("H") || waarde.equals("A") ){
-                     this.kaarten[i] = new Kaart(soort.charAt(0),waarde.charAt(0));
-                 }else {
-                     break;
-                 }
-                } else {
-                    break;
+        if (bevatKaartVanSoort(soort)){
+            while(correct!=1){
+                soortRandom = kaarten[(int) (Math.random()*(max + 1))];
+                    if (soortRandom.toString().charAt(0)==soort){
+                        correct++;
+                     return soortRandom;
                 }
             }
         }
+        return null;
     }
 }
-
-
-*/

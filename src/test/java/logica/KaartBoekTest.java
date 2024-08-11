@@ -1,4 +1,3 @@
-/*
 package logica;
 
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author kristien.vanassche
  * @version 25/02/2024
- *//*
+ */
 class KaartBoekTest {
     private KaartBoek boek1, boek2, boek3, boek4, boek5, boek6;
 
@@ -21,35 +20,35 @@ class KaartBoekTest {
         boek3 = new KaartBoek(new char[]{'H', 'R', 'S'});
         boek4 = new KaartBoek(new char[]{'H', '*'});
 
-        boek5 = new KaartBoek(new String[]{"H7", "K-T" });
+        boek5 = new KaartBoek(new String[]{"H7", "KT" });
         boek6 = new KaartBoek(new String[]{"H7", "**" });
     }
 
     @Test
     void defaultConstructorBoek1() {
         assertNotNull(boek1);
-        assertEquals(52, boek1.AANTAL);
+        assertEquals(52, boek1.aantal);
         assertEquals(52, boek1.kaarten.length);
     }
 
     @Test
     void nietDefaultConstructorBoek2() {
         assertNotNull(boek2);
-        assertEquals(13 * 2, boek2.AANTAL);
+        assertEquals(13 * 2, boek2.aantal);
         assertEquals(13 * 2, boek2.kaarten.length);
     }
 
     @Test
     void nietDefaultConstructorBoek3() {
         assertNotNull(boek3);
-        assertEquals(13 * 3, boek3.AANTAL);
+        assertEquals(13 * 3, boek3.aantal);
         assertEquals(13 * 3, boek3.kaarten.length);
     }
 
     @Test
     void nietDefaultConstructorBoek4() {
         assertNotNull(boek4);
-        assertEquals(13, boek4.AANTAL);
+        assertEquals(13, boek4.aantal);
         assertEquals(13, boek4.kaarten.length);
     }
 
@@ -57,8 +56,8 @@ class KaartBoekTest {
     void nietDefaultConstructorBoek5() {
         assertNotNull(boek5);
         assertEquals(2, boek5.kaarten.length);
-    }}
-/*
+    }
+
     @Test
     void bevatKaartBoek1() {
         String soorten = "HSKR";
@@ -209,5 +208,3 @@ class KaartBoekTest {
         assertTrue(boek6.bevatKaart("H7"));
     }
 }
-
- */
